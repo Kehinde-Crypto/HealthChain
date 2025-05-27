@@ -1,0 +1,721 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "itemId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "enum SupplyChain.Category",
+						"name": "category",
+						"type": "uint8"
+					}
+				],
+				"name": "ItemCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "itemId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "movedBy",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "location",
+						"type": "string"
+					}
+				],
+				"name": "ItemMoved",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "itemId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "validatedBy",
+						"type": "address"
+					}
+				],
+				"name": "ItemValidated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "itemId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "verifier",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "status",
+						"type": "bool"
+					}
+				],
+				"name": "ItemVerified",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "itemId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "nationalityId",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "enum SupplyChain.Category",
+						"name": "category",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "isArrived",
+						"type": "bool"
+					}
+				],
+				"name": "Nationality",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum SupplyChain.Category",
+						"name": "",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "categorizedItems",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price_in_usd",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "currencyCode",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "delivery_days",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "delivery_fee_in_usd",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount_of_users",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "consumersAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "foodList",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price_in_usd",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "currencyCode",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "delivery_days",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "delivery_fee_in_usd",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount_of_users",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "itemValidations",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "medical_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "medical_report",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "block",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "is_validated",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "medicals",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isTrue",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount_of_users",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "users",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "currentStatus",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "warehouseId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "movementLogs",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "tracking_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "trunk_id",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "delivery_company",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "delivery_fee_in_usd",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "delivered_on_time",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "transaction",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "isTransact_Successful",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountOfUsers",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "payment_receiver",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "payment_receiver_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "medicalsId",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "transactionDetails",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "isTransact_Successful",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountOfUsers",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "payment_receiver",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "payment_receiver_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "medicalsId",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "transactions",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "isTransact_Successful",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountOfUsers",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "payment_receiver",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "payment_receiver_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "medicalsId",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "usersAddressToMedicalId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isTrue",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount_of_users",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "users",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "currentStatus",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "warehouseId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "validationResults",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "medical_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "medical_report",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "block",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "is_validated",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "warehouseInventory",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isTrue",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount_of_users",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "users",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "currentStatus",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "warehouseId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "warehouseInventory_",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isTrue",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount_of_users",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "users",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "currentStatus",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "warehouseId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"src/SupplyChain.sol": "SupplyChain"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"src/SupplyChain.sol": {
+			"keccak256": "0xdba915b14d58856d4774ec022aa69a82d37f62897a715a508f120e734951bf18",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e9968c217878cafecd1daec6c0cd71715bfc51c55658ab5f4aaf3963d6a2b822",
+				"dweb:/ipfs/QmNRMj4s8aYwtUtF5d9PqLLNxK2r7UGrrhko5rH7uJrTN4"
+			]
+		}
+	},
+	"version": 1
+}

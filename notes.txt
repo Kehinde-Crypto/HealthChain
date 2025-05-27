@@ -1,0 +1,14 @@
+We have WareHousing: So we will create a mini-data base using Excel to be able to evalauate all the Inputs and tuples in Inputs
+Table: Warehouses
+- id
+- location
+- capacity
+- supervisor_address
+
+Table: StoredMedicines
+- id
+- warehouse_id
+- medicine_id
+- entry_timestamp
+- exit_timestamp
+- current_status (e.g., stored, released, rejected)
