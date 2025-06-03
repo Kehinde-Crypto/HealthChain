@@ -67,4 +67,5 @@ $ cast --help
 
 
 
-##   
+##   THE FLOW CHAT FOR THE HEALTHCHAIN PROJECT
+https://lucid.app/lucidchart/110bc867-4d1f-4cee-b3cb-01d6405feecd/edit?invitationId=inv_586c0a15-bc63-495f-b892-99b36304f371&page=0_0#

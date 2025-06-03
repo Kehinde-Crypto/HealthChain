@@ -1,6 +1,5 @@
-// SPDX-Lisence-Identifier:MIT
-pragma solidity ^
-pragma experimental ABIEncoderV2;
+//SPDX-License-Identifier:MIT
+pragma solidity ^0.8.24;
 
 import "forge-std/Test.sol";
 import "../src/SupplyChain.sol";
@@ -12,22 +11,22 @@ contract SupplyChainTest is Test {
 
     function setUp() public {
         vm.prank(owner);
-        supplyChain = new SupplyChain();
+        supplyChain = new SupplyChain(owner);
     }
 
     function testOwnerIsSetCorrectly() public {
         assertEq(supplyChain.owner(), owner);
     }
-
     function testAddProduct() public {
         vm.prank(owner);
-        uint256 productId = supplyChain.addProduct("Medicine", "Batch001");
-        (string memory name, string memory batch, , ) = supplyChain.getProduct(
-            productId
-        );
-        assertEq(name, "Medicine");
+        uint256 productId = supplyChain.addProduct("Vaccine", "Batch001");
+        (string memory name, string memory batch, string memory status, address addedBy) = supplyChain.getProduct(productId);
+        assertEq(name, "Vaccine");
         assertEq(batch, "Batch001");
+        assertEq(status, "Created");
+        assertEq(addedBy, owner);
     }
+    
 
     function testOnlyOwnerCanAddProduct() public {
         vm.prank(user);
@@ -57,36 +56,36 @@ contract SupplyChainTest is Test {
         assertEq(status, "Created");
         assertEq(addedBy, owner);
     }
-}
-function testAddMultipleProducts() public {
-  vm.prank(owner);
-  uint256 id1 = supplyChain.addProduct("DrugA", "BatchA");
-  uint256 id2 = supplyChain.addProduct("DrugB", "BatchB");
-  (string memory name1, , , ) = supplyChain.getProduct(id1);
-  (string memory name2, , , ) = supplyChain.getProduct(id2);
-  assertEq(name1, "DrugA");
-  assertEq(name2, "DrugB");
-}
+    function testAddMultipleProducts() public {
+        vm.prank(owner);
+        uint256 id1 = supplyChain.addProduct("DrugA", "BatchA");
+        uint256 id2 = supplyChain.addProduct("DrugB", "BatchB");
+        (string memory name1, , , ) = supplyChain.getProduct(id1);
+        (string memory name2, , , ) = supplyChain.getProduct(id2);
+        assertEq(name1, "DrugA");
+        assertEq(name2, "DrugB");
+    }
 
-function testUpdateProductStatusEmitsEvent() public {
-  vm.prank(owner);
-  uint256 productId = supplyChain.addProduct("Device", "Batch005");
-  vm.expectEmit(true, false, false, true);
-  emit supplyChain.ProductStatusUpdated(productId, "Delivered");
-  supplyChain.updateProductStatus(productId, "Delivered");
-}
+    function testUpdateProductStatusEmitsEvent() public {
+        vm.prank(owner);
+        uint256 productId = supplyChain.addProduct("Device", "Batch005");
+        vm.expectEmit(true, false, false, true);
+        emit supplyChain.ProductStatusUpdated(productId, "Delivered");
+        supplyChain.updateProductStatus(productId, "Delivered");
+    }
 
-function testUpdateProductStatusRevertsForNonOwner() public {
-  vm.prank(owner);
-  uint256 productId = supplyChain.addProduct("Mask", "Batch006");
-  vm.prank(user);
-  vm.expectRevert("Ownable: caller is not the owner");
-  supplyChain.updateProductStatus(productId, "Lost");
-}
+    function testUpdateProductStatusRevertsForNonOwner() public {
+        vm.prank(owner);
+        uint256 productId = supplyChain.addProduct("Mask", "Batch006");
+        vm.prank(user);
+        vm.expectRevert("Ownable: caller is not the owner");
+        supplyChain.updateProductStatus(productId, "Lost");
+    }
 
-function testGetProductRevertsForInvalidId() public {
-  vm.prank(owner);
-  supplyChain.addProduct("Gloves", "Batch007");
-  vm.expectRevert();
-  supplyChain.getProduct(9999);
+    function testGetProductRevertsForInvalidId() public {
+        vm.prank(owner);
+        supplyChain.addProduct("Gloves", "Batch007");
+        vm.expectRevert();
+        supplyChain.getProduct(9999);
+    }
 }

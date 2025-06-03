@@ -1,12 +1,18 @@
 {
 	"compiler": {
-		"version": "0.8.30+commit.73712a01"
+		"version": "0.8.24+commit.e11b9ed9"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_priceFeedAddress",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -72,8 +78,39 @@
 					{
 						"indexed": false,
 						"internalType": "address",
-						"name": "validatedBy",
+						"name": "movedBy",
 						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "location",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "priceInNGN",
+						"type": "uint256"
+					}
+				],
+				"name": "ItemMovedWithPrice",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "batchId",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "status",
+						"type": "bool"
 					}
 				],
 				"name": "ItemValidated",
@@ -134,6 +171,86 @@
 				],
 				"name": "Nationality",
 				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "batch",
+						"type": "string"
+					}
+				],
+				"name": "addProduct",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "batchId",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "originCountry",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "destinationCountry",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "itemIds",
+						"type": "uint256[]"
+					}
+				],
+				"name": "authorizeImport",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "batchId",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "originCountry",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "destinationCountry",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "itemIds",
+						"type": "uint256[]"
+					}
+				],
+				"name": "authorizeImportWithPrice",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			},
 			{
 				"inputs": [
@@ -258,6 +375,53 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getLatestPrice",
+				"outputs": [
+					{
+						"internalType": "int256",
+						"name": "",
+						"type": "int256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					}
+				],
+				"name": "getProduct",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -330,6 +494,16 @@
 						"internalType": "uint256",
 						"name": "warehouseId",
 						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "batch",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -507,6 +681,47 @@
 			{
 				"inputs": [
 					{
+						"internalType": "string",
+						"name": "batchId",
+						"type": "string"
+					},
+					{
+						"internalType": "string[]",
+						"name": "itemNames",
+						"type": "string[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "quantities",
+						"type": "uint256[]"
+					}
+				],
+				"name": "transferMedicine",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "newStatus",
+						"type": "string"
+					}
+				],
+				"name": "updateProductStatus",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "",
 						"type": "address"
@@ -543,6 +758,16 @@
 						"internalType": "uint256",
 						"name": "warehouseId",
 						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "batch",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -631,6 +856,16 @@
 						"internalType": "uint256",
 						"name": "warehouseId",
 						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "batch",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -675,6 +910,16 @@
 						"internalType": "uint256",
 						"name": "warehouseId",
 						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "batch",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -694,9 +939,9 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"src/SupplyChain.sol": "SupplyChain"
+			"HealthChain/src/SupplyChain.sol": "SupplyChain"
 		},
-		"evmVersion": "prague",
+		"evmVersion": "shanghai",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -708,12 +953,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"src/SupplyChain.sol": {
-			"keccak256": "0xdba915b14d58856d4774ec022aa69a82d37f62897a715a508f120e734951bf18",
+		"HealthChain/src/SupplyChain.sol": {
+			"keccak256": "0xd36840d533c557b28109326a86dbf3410da171207a02092f35626c07304de056",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e9968c217878cafecd1daec6c0cd71715bfc51c55658ab5f4aaf3963d6a2b822",
-				"dweb:/ipfs/QmNRMj4s8aYwtUtF5d9PqLLNxK2r7UGrrhko5rH7uJrTN4"
+				"bzz-raw://8dadd839fd1fc75459856921b67e1c2d083ebb2139dabd0ca7ac37b8d8120cc1",
+				"dweb:/ipfs/QmTRT74mE2mMyUCHJQ949b6Yjga9YZzTVf65MMaruViWnm"
 			]
 		}
 	},
